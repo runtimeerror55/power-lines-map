@@ -35,9 +35,9 @@ const LeafletMap = () => {
   };
 
   const getLineWeight = (line) => {
-    if (line.properties.voltage >= 500) return 4;
-    if (line.properties.voltage >= 345) return 3;
-    return 2;
+    if (line.properties.voltage >= 500) return 2;
+    if (line.properties.voltage >= 345) return 1.5;
+    return 1;
   };
 
   const handleLineClick = (line) => {
@@ -170,34 +170,7 @@ const LeafletMap = () => {
                 </Popup>
               </Polyline>
 
-              {/* Endpoint markers */}
-              {coordinates.map((coord, index) => (
-                <Marker
-                  key={`${line.id}-${index}`}
-                  position={coord}
-                  icon={L.divIcon({
-                    className: "custom-div-icon",
-                    html: `<div style='background-color:${getLineColor(
-                      line
-                    )};width:${isSelected ? 8 : 6}px;height:${
-                      isSelected ? 8 : 6
-                    }px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);'></div>`,
-                    iconSize: [isSelected ? 8 : 6, isSelected ? 8 : 6],
-                    iconAnchor: [isSelected ? 4 : 3, isSelected ? 4 : 3],
-                  })}
-                  eventHandlers={{
-                    click: () => handleLineClick(line),
-                  }}
-                >
-                  <Popup>
-                    <div>
-                      <strong>{line.properties.name}</strong>
-                      <br />
-                      Station {index + 1}
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+              {/* Circular dot markers removed */}
             </React.Fragment>
           );
         })}
